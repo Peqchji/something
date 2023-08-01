@@ -1,0 +1,32 @@
+{
+  "name": "backend_traveling",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "_moduleAliases": {
+    "@root": "./",
+    "@configs": "./configs",
+    "@controllers": "./controllers",
+    "@middlewares": "./middlewares",
+    "@models": "./models",
+    "@routes": "./routes",
+    "@services": "./services"
+  },
+  "scripts": {
+    "dev": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.1",
+    "module-alias": "^2.2.3",
+    "mongoose": "^7.4.1",
+    "morgan": "^1.10.0"
+  }
+}
