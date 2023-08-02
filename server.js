@@ -32,8 +32,9 @@ app.get('/', function(req, res) {
   res.send('what')
 })
 app.use('/', signUpRoute)
+app.use('/', authRoute)
 
-app.use(errorHandler)
+//app.use(errorHandler)
 
 app.listen(port, function(req, res) {
   console.log(`Server is running on port ${port}`)

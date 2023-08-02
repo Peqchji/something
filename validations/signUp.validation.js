@@ -35,6 +35,13 @@ const signUpValidate = new joi.object({
     .required()
 })
 
-module.exports = {
-  signUpValidate,
+module.exports = async function(req, res, next) {
+  try {
+    const data = await signUpValidate.validateAsync(req.body)
+    next()
+    return
+  }
+  catch (error) {
+    return res.status(403).json({ message: error.message })
+  }
 }
