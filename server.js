@@ -1,23 +1,40 @@
 require('module-alias/register')
 
-const morgan = require('morgan')
+require('dotenv').config()
+const port = process.env.port
+
 const express = require('express')
 const app = express()
 const cors = require('cors')
+//const morgan = require('morgan')
+//const compression = require('compression')
+
+// Database
 const corsOptions = require('@configs/corsOptions.config')
+const dbConnect = require('./database/connect.database')
+dbConnect()
 
-require('dotenv').config()
-
-const port = process.env.PORT || 3000
+// Middlewares
+const errorHandler = require('@middlewares/errorHandler.middleware')
 //app.use(morgan('dev'))
+//app.use(compression)
 app.use(cors(corsOptions))
 app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ limit: "1mb", extended: true }))
 
-app.get('/', (req, res) => {
-  res.send('Hie')
+
+// Route
+const {
+  authRoute,
+  signUpRoute
+} = require('@routes')
+app.get('/', function(req, res) {
+  res.send('what')
 })
+app.use('/', signUpRoute)
 
-app.listen(port, () => {
-  console.log(`Server is now running on port ${port}`)
+app.use(errorHandler)
+
+app.listen(port, function(req, res) {
+  console.log(`Server is running on port ${port}`)
 })

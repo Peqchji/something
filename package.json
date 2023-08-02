@@ -10,7 +10,8 @@
     "@middlewares": "./middlewares",
     "@models": "./models",
     "@routes": "./routes",
-    "@services": "./services"
+    "@services": "./services",
+    "@validations": "./validations"
   },
   "scripts": {
     "dev": "nodemon server.js",
@@ -24,6 +25,8 @@
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "joi": "^17.9.2",
+    "joi-phone-number": "^5.1.1",
     "jsonwebtoken": "^9.0.1",
     "module-alias": "^2.2.3",
     "mongoose": "^7.4.1",
