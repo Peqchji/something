@@ -15,8 +15,8 @@ async function signUp(req, res, next) {
       return res.status(422).json({ message: 'email or username is already been signed up' })
     }
     
-    const user = new User(data);
-    await user.save();
+    const user = new User(data)
+    await user.save()
     
     return res.status(201).json({ message: 'sign-up successfully' })
   } catch (error) {
