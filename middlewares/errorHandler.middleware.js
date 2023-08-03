@@ -1,12 +1,10 @@
-function errorHandle(error, req, res, next){
-  error.statusCode = error.statusCode || 500
-  error.status = error.status || 'Internal Server Error'
+const errorHandle = function(error, req, res, next) {
+  error.statusCode = error.statusCode || 500;
   
   return res.status(error.statusCode).json({
-    'statusCode': error.statusCode,
-    'status': error.status,
-    'message': error.message
-  })
+    route: `${req.originalUrl} went wrong`, 
+    message: `${error.name}: ${error.message}`,
+  });
 }
 
-module.exports = errorHandle
+module.exports = errorHandle;

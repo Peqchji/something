@@ -1,9 +1,8 @@
 require('dotenv').config()
 const dbConfig = require('@configs/database.config')
-
 const mongoose = require('mongoose')
 
-async function connect() {
+const connect = async function() {
   try {
     await mongoose.connect(process.env.DB_URI, dbConfig)
     console.log("Connect database successfully")

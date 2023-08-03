@@ -1,41 +1,38 @@
-require('module-alias/register')
+require('module-alias/register');
 
-require('dotenv').config()
-const port = process.env.port
+require('dotenv').config();
+const port = process.env.port;
 
-const express = require('express')
-const app = express()
-const cors = require('cors')
-//const morgan = require('morgan')
+const express = require('express');
+const app = express();
+const cors = require('cors');
+const morgan = require('morgan');
 //const compression = require('compression')
 
 // Database
-const corsOptions = require('@configs/corsOptions.config')
-const dbConnect = require('./database/connect.database')
-dbConnect()
+const corsOptions = require('@configs/corsOptions.config');
+const dbConnect = require('./database/connect.database');
+dbConnect();
 
 // Middlewares
-const errorHandler = require('@middlewares/errorHandler.middleware')
-//app.use(morgan('dev'))
+const errorHandler = require('@middlewares/errorHandler.middleware');
+const cookieParser = require('cookie-parser');
+app.use(morgan('dev'));
 //app.use(compression)
-app.use(cors(corsOptions))
-app.use(express.json())
-app.use(express.urlencoded({ limit: "1mb", extended: true }))
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use(express.urlencoded({ limit: '1mb', extended: true }));
+app.use(cookieParser());
 
 
 // Route
-const {
-  authRoute,
-  signUpRoute
-} = require('@routes')
-app.get('/', function(req, res) {
-  res.send('what')
-})
-app.use('/', signUpRoute)
-app.use('/', authRoute)
+const { authRoute, signUpRoute } = require('@routes');
 
-//app.use(errorHandler)
+app.use('/', signUpRoute);
+app.use('/auth', authRoute);
 
-app.listen(port, function(req, res) {
-  console.log(`Server is running on port ${port}`)
-})
+app.use(errorHandler)
+
+app.listen(port, function () {
+  console.log(`Server is running on port ${port}`);
+});
